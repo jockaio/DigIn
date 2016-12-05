@@ -22,5 +22,24 @@ namespace DigInAPI.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public UserData UserData { get; set; }
+    }
+
+    public class UserData
+    {
+        public int ID { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+    }
+
+    public class Skill
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public DateTime FromDate { get; set; }
+        public DateTime ToDate { get; set; }
     }
 }
