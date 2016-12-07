@@ -1,7 +1,7 @@
 ﻿'use strict';
 app.factory('authService', ['$http', '$q', 'localStorageService', function ($http, $q, localStorageService) {
 
-    var serviceBase = 'http://localhost:61129/';
+    var serviceBase = 'http://localhost:54450/';
     var authServiceFactory = {};
 
     var _authentication = {
@@ -27,6 +27,7 @@ app.factory('authService', ['$http', '$q', 'localStorageService', function ($htt
 
         $http.post(serviceBase + 'token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }).success(function (response) {
 
+            console.log(response);
             localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
 
             _authentication.isAuth = true;

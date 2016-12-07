@@ -328,7 +328,15 @@ namespace DigIn.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
+            var user = new ApplicationUser() {
+                UserName = model.Email,
+                Email = model.Email,
+                UserProfile = new UserProfileModel
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName
+                }
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 

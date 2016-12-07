@@ -13,6 +13,7 @@ using DigIn.API.Models;
 
 namespace DigIn.API.Controllers
 {
+    [Authorize]
     public class ProjectsController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
