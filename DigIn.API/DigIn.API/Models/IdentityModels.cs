@@ -24,6 +24,7 @@ namespace DigIn.API.Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            //Configuration.ProxyCreationEnabled = false;
         }
         
         public static ApplicationDbContext Create()
@@ -32,5 +33,8 @@ namespace DigIn.API.Models
         }
 
         public System.Data.Entity.DbSet<DigIn.API.Models.ProjectModel> ProjectModels { get; set; }
+
+        public System.Data.Entity.DbSet<DigIn.API.Models.UserProfileModel> UserProfileModels { get; set; }
+        public System.Data.Entity.DbSet<DigIn.API.Models.Skill> Skills { get; set; }
     }
 }

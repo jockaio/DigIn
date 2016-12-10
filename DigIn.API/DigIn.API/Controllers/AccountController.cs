@@ -334,7 +334,8 @@ namespace DigIn.API.Controllers
                 UserProfile = new UserProfileModel
                 {
                     FirstName = model.FirstName,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    Email = model.Email
                 }
             };
 

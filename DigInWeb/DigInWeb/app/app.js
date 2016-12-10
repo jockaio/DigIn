@@ -1,4 +1,4 @@
-﻿var app = angular.module('AngularAuthApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar']);
+﻿var app = angular.module('DigInApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'ngMaterial']);
 
 app.config(function ($routeProvider) {
 
@@ -20,6 +20,11 @@ app.config(function ($routeProvider) {
     $routeProvider.when("/orders", {
         controller: "ordersController",
         templateUrl: "/app/views/orders.html"
+    });
+
+    $routeProvider.when("/userprofile", {
+        controller: "userprofileController",
+        templateUrl: "/app/views/userprofile.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });

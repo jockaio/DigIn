@@ -1,0 +1,36 @@
+﻿<md-dialog aria-label="Lägg till färdighet">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools ">
+                <h2>Lägg till färdighet</h2>
+                <span flex></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close" ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                    <fieldset>
+                        <legend>Fyll i följande fält</legend>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <input ng-model="skill.name" type="text" class="form-control" id="inputEmail" placeholder="Titel" autocomplete="off" style="background-image: url(&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAASCAYAAABSO15qAAAAAXNSR0IArs4c6QAAAPhJREFUOBHlU70KgzAQPlMhEvoQTg6OPoOjT+JWOnRqkUKHgqWP4OQbOPokTk6OTkVULNSLVc62oJmbIdzd95NcuGjX2/3YVI/Ts+t0WLE2ut5xsQ0O+90F6UxFjAI8qNcEGONia08e6MNONYwCS7EQAizLmtGUDEzTBNd1fxsYhjEBnHPQNG3KKTYV34F8ec/zwHEciOMYyrIE3/ehKAqIoggo9inGXKmFXwbyBkmSQJqmUNe15IRhCG3byphitm1/eUzDM4qR0TTNjEixGdAnSi3keS5vSk2UDKqqgizLqB4YzvassiKhGtZ/jDMtLOnHz7TE+yf8BaDZXA509yeBAAAAAElFTkSuQmCC&quot;); background-repeat: no-repeat; background-attachment: scroll; background-size: 16px 18px; background-position: 98% 50%;">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label></label>
+                                <textarea ng-model="skill.description" class="form-control" rows="5" cols="50"></textarea>
+                                <span class="help-block">En kort beskrivning av din färdighet.</span>
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row"> 
+            <button type="reset" class="btn btn-default" ng-click="cancel()">Avbryt</button>
+            <button type="submit" class="btn btn-primary" ng-click="answer(skill)">Spara</button>          
+        </md-dialog-actions>
+    </form>
+</md-dialog>

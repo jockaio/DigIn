@@ -1,8 +1,9 @@
 ﻿<!DOCTYPE html>
-<html data-ng-app="AngularAuthApp">
+<html data-ng-app="DigInApp">
 <head>
     <meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
     <title>DigIn - Skräddarsy din framgång</title>
+    <link href="node_modules/angular-material/angular-material.min.css" rel="stylesheet" />
     <link href="content/css/bootstrap.css" rel="stylesheet" />
     <link href="content/css/site.css" rel="stylesheet" />
     <link href="content/css/loading-bar.css" rel="stylesheet" />
@@ -21,6 +22,7 @@
                 <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                     <ul class="nav navbar-nav navbar-right">
                         <li data-ng-hide="!authentication.isAuth"><a href="#/orders">Test</a></li>
+                        <li data-ng-hide="!authentication.isAuth"><a href="#/userprofile">{{authentication.userName}}</a></li>
                         <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logga ut</a></li>
                         <li data-ng-hide="authentication.isAuth"> <a href="#/login">Logga in</a></li>
                         <li data-ng-hide="authentication.isAuth"> <a href="#/signup">Registrera</a></li>
@@ -52,8 +54,12 @@
         </div>
     </div>
     <!-- 3rd party libraries -->
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+    <!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>-->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.min.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
     <script src="scripts/angular-local-storage.min.js"></script>
     <script src="scripts/loading-bar.js"></script>
     <!-- Load app main script -->
@@ -62,11 +68,13 @@
     <script src="app/services/authInterceptorService.js"></script>
     <script src="app/services/authService.js"></script>
     <script src="app/services/ordersService.js"></script>
+    <script src="app/services/userprofileService.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexController.js"></script>
     <script src="app/controllers/homeController.js"></script>
     <script src="app/controllers/loginController.js"></script>
     <script src="app/controllers/signupController.js"></script>
     <script src="app/controllers/ordersController.js"></script>
+    <script src="app/controllers/userprofileController.js"></script>
 </body>
 </html>
