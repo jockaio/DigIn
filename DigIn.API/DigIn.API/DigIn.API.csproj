@@ -222,10 +222,23 @@
     <Compile Include="Migrations\201612201843288_dbupdate6.Designer.cs">
       <DependentUpon>201612201843288_dbupdate6.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612211513556_dbupdate7.cs" />
+    <Compile Include="Migrations\201612211513556_dbupdate7.Designer.cs">
+      <DependentUpon>201612211513556_dbupdate7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612211528522_dbupdate8.cs" />
+    <Compile Include="Migrations\201612211528522_dbupdate8.Designer.cs">
+      <DependentUpon>201612211528522_dbupdate8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612211538423_dbupdate9.cs" />
+    <Compile Include="Migrations\201612211538423_dbupdate9.Designer.cs">
+      <DependentUpon>201612211538423_dbupdate9.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\UserProfileModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -273,6 +286,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612201843288_dbupdate6.resx">
       <DependentUpon>201612201843288_dbupdate6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211513556_dbupdate7.resx">
+      <DependentUpon>201612211513556_dbupdate7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211528522_dbupdate8.resx">
+      <DependentUpon>201612211528522_dbupdate8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612211538423_dbupdate9.resx">
+      <DependentUpon>201612211538423_dbupdate9.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

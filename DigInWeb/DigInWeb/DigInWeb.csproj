@@ -66,9 +66,13 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\controllers\projectsController.js" />
     <Content Include="app\controllers\userprofileController.js" />
+    <Content Include="app\services\projectsService.js" />
     <Content Include="app\services\userprofileService.js" />
+    <Content Include="app\views\createproject.html" />
     <Content Include="app\views\myprojectsoverview.html" />
+    <Content Include="app\views\project.html" />
     <Content Include="app\views\shared\skillformpopup.html" />
     <Content Include="app\views\userprofile.html" />
     <Content Include="content\css\bootstrap-theme.css" />
@@ -658,7 +662,6 @@
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="scripts\loading-bar.js" />
-    <Content Include="scripts\userprofileJQuery.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

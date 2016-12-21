@@ -1,14 +1,19 @@
-﻿<h1>Uppdrag</h1>
-<p>Här ser du en överblick över dina uppdrag</p>
-
-<h3>Mina uppdrag</h3>
-<ul>
-    <li>Superprojektet</li>
-</ul>
-
-<h3>Deltagande i andras uppdrag</h3>
-<ul>
-    <li>
-        Jannes logo
-    </li>
-</ul>
+﻿<div class="row">
+    <h3>Mina uppdrag</h3>
+    <p>Här ser du en överblick över dina uppdrag</p>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <ul class="list-group">
+            <li ng-repeat="project in projectsOverviewData" class="list-group-item">
+                <span class="badge">2</span>
+                <a href="#/projects/{{project.id}}">{{project.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <a href="#/createproject/new" class="btn btn btn-success">
+            Skapa nytt uppdrag
+        </a>
+    </div>
+</div>

@@ -28,8 +28,18 @@ app.config(function ($routeProvider) {
     });
 
     $routeProvider.when("/myprojectsoverview", {
-        controller: "userprofileController",
+        controller: "projectsController",
         templateUrl: "/app/views/myprojectsoverview.html"
+    });
+
+    $routeProvider.when("/projects/:projectID", {
+        controller: "projectsController",
+        templateUrl: "/app/views/project.html"
+    });
+
+    $routeProvider.when("/createproject/:new", {
+        controller: "projectsController",
+        templateUrl: "/app/views/createproject.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Microsoft.AspNet.Identity;
 using DigIn.API.Models;
 
 namespace DigIn.API.Controllers
@@ -21,7 +22,11 @@ namespace DigIn.API.Controllers
         // GET: api/Projects
         public IQueryable<ProjectModel> GetProjectModels()
         {
-            return db.ProjectModels;
+            var currentUserId = User.Identity.GetUserId();
+            var userProfileId = db.Users.Where(u => u.Id == currentUserId).Select(up => up.UserProfile.ID).FirstOrDefault();
+            var projectModels = db.ProjectModels.Where(p => p.ProjectOwnerID == userProfileId || p.ProjectContributors.Select(pc => pc.User.ID).Contains(userProfileId));
+
+            return projectModels;
         }
 
         // GET: api/Projects/5
@@ -76,6 +81,9 @@ namespace DigIn.API.Controllers
         [ResponseType(typeof(ProjectModel))]
         public async Task<IHttpActionResult> PostProjectModel(ProjectModel projectModel)
         {
+            var currentUserId = User.Identity.GetUserId();
+            projectModel.ProjectOwner = await db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile).FirstAsync();
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
