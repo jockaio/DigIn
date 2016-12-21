@@ -68,12 +68,14 @@
   <ItemGroup>
     <Content Include="app\controllers\userprofileController.js" />
     <Content Include="app\services\userprofileService.js" />
+    <Content Include="app\views\myprojectsoverview.html" />
     <Content Include="app\views\shared\skillformpopup.html" />
     <Content Include="app\views\userprofile.html" />
     <Content Include="content\css\bootstrap-theme.css" />
     <Content Include="content\css\bootstrap-theme.min.css" />
     <Content Include="content\css\bootstrap.min.css" />
     <Content Include="content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="content\imgs\empty_profile.png" />
     <Content Include="content\js\bootstrap.js" />
     <Content Include="content\js\bootstrap.min.js" />
     <Content Include="content\js\npm.js" />
@@ -552,6 +554,10 @@
     <Content Include="node_modules\angular-material\modules\layouts\angular-material.layouts.css" />
     <Content Include="node_modules\angular-material\modules\layouts\angular-material.layouts.ie_fixes.css" />
     <Content Include="node_modules\angular-material\modules\layouts\angular-material.layouts.min.css" />
+    <Content Include="node_modules\angular-xeditable-0.5.0\css\xeditable.css" />
+    <Content Include="node_modules\angular-xeditable-0.5.0\css\xeditable.min.css" />
+    <Content Include="node_modules\angular-xeditable-0.5.0\js\xeditable.js" />
+    <Content Include="node_modules\angular-xeditable-0.5.0\js\xeditable.min.js" />
     <Content Include="packages.config" />
     <Content Include="content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="content\fonts\glyphicons-halflings-regular.ttf" />
@@ -652,6 +658,7 @@
     <Content Include="index.html" />
     <Content Include="scripts\angular-local-storage.min.js" />
     <Content Include="scripts\loading-bar.js" />
+    <Content Include="scripts\userprofileJQuery.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

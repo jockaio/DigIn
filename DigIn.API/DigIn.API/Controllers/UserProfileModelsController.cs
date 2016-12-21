@@ -8,6 +8,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using DigIn.API.Models;
 using Microsoft.AspNet.Identity;
+using System.Collections.Generic;
 
 namespace DigIn.API.Controllers
 {
@@ -18,39 +19,41 @@ namespace DigIn.API.Controllers
 
         // GET: api/UserProfileModels
         [ResponseType(typeof(UserProfileModel))]
-        public async Task<IHttpActionResult> GetUserProfileModel()
+        public async Task<IHttpActionResult> GetUserProfileModel(int ID = 0)
         {
-            var currentUserId = User.Identity.GetUserId();
-            UserProfileModel userProfileModel = await db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile).FirstAsync();
+            UserProfileModel userProfileModel = new UserProfileModel();
+            if (ID == 0)
+            {
+                var currentUserId = User.Identity.GetUserId();
+                userProfileModel = await db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile).FirstAsync();
+            }
+            else
+            {
+                userProfileModel = await db.UserProfileModels.Where(x => x.ID == ID).FirstAsync();
+            }
+
+            //Check if user profile is found
             if (userProfileModel == null)
             {
                 return NotFound();
             }
 
+            //Check if user is allowed to edit the profile.
+            userProfileModel.UserMatch = UserProfileMatch(userProfileModel.ID);
+
             return Ok(userProfileModel);
         }
 
         // PUT: api/UserProfileModels
-        [ResponseType(typeof(void))]
+        [ResponseType(typeof(UserProfileModel))]
         public async Task<IHttpActionResult> PutUserProfileModel(UserProfileModel userProfileModel)
         {
+            if (!UserProfileMatch(userProfileModel.ID))
+            {
+                return BadRequest("User not allowed to edit profile.");
+            }
             var currentUserId = User.Identity.GetUserId();
             var id = await db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile.ID).FirstAsync();
-
-            //ApplicationDbContext skillsContext = new ApplicationDbContext();
-            //foreach (var item in (userProfileModel.Skills))
-            //{
-            //    if (item.ID == 0)
-            //    {
-            //        skillsContext.Skills.Add(item);
-            //    }
-            //    else
-            //    {
-            //        skillsContext.Entry(item).State = EntityState.Modified;
-            //    }
-
-            //}
-            //await skillsContext.SaveChangesAsync();
 
             foreach (var item in userProfileModel.Skills)
             {
@@ -93,7 +96,28 @@ namespace DigIn.API.Controllers
                 }
             }
 
-            return StatusCode(HttpStatusCode.NoContent);
+            var result = await db.UserProfileModels.Where(x => x.ID == userProfileModel.ID).FirstAsync();
+
+            return Ok(result);
+        }
+
+        [ResponseType(typeof(List<Skill>))]
+        [Route("api/DeleteSkill/{id}")]
+        public async Task<IHttpActionResult> DeleteSkill (int id)
+        {
+            Skill skill = await db.Skills.FindAsync(id);
+            if (skill == null)
+            {
+                return NotFound();
+            }
+
+            db.Skills.Remove(skill);
+            await db.SaveChangesAsync();
+
+            var currentUserId = User.Identity.GetUserId();
+            var skills = await db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile.Skills).FirstAsync();
+
+            return Ok(skills);
         }
 
         // POST: api/UserProfileModels
@@ -139,6 +163,13 @@ namespace DigIn.API.Controllers
         private bool UserProfileModelExists(int id)
         {
             return db.UserProfileModels.Count(e => e.ID == id) > 0;
+        }
+
+        private bool UserProfileMatch(int ID)
+        {
+            var currentUserId = User.Identity.GetUserId();
+           
+            return db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile.ID).First() == ID;
         }
     }
 }

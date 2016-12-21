@@ -12,8 +12,11 @@ namespace DigIn.API.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string Description { get; set; }
         public virtual List<Skill> Skills { get; set; }
         public virtual List<Experience> Experiences { get; set; }
+        [NotMapped]
+        public bool UserMatch { get; set; }
     }
 
     public class Skill
@@ -33,5 +36,11 @@ namespace DigIn.API.Models
         public string Title { get; set; }
         public string Description { get; set; }
         public ProjectModel Project { get; set; }
+    }
+
+    public enum Category
+    {
+        IT,
+        Projektledning
     }
 }

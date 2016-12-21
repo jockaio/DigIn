@@ -9,3 +9,34 @@
 .dl-horizontal dt{
     text-align: left;
 }
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #ffffff;
+    border: none;
+}
+
+textarea .form-control{
+    padding: 0px;
+}
+
+.btn {
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+a{
+    cursor: pointer;
+}
+
+.editable-input{
+    border:none;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+/*#skills-table input {
+    background-color: inherit;
+    cursor: default;
+}*/

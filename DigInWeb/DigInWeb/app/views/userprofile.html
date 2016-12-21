@@ -1,28 +1,107 @@
 ﻿<div class="row">
+    <div class="col-md-2">
+        <img src="../../content/imgs/empty_profile.png" style="width: 75%; height: 75%;"/>
+    </div>
     <div class="col-md-6">
         <h3>{{userprofileData.firstName}} {{userprofileData.lastName}}</h3>
         <p class="text-muted">{{userprofileData.email}}</p>
     </div>
+</div>
+<div class="row">
     <div class="col-md-6">
-        <p>Här händer det grejer.</p>
+        <h4>Om {{userprofileData.firstName}}</h4>
+        <div class="col-md-12 mouse-over" ng-mouseover="mouseOverDescription = true" ng-mouseleave="mouseOverDescription = false">
+            <div class="col-md-11">
+                <textarea spellcheck="false" class="form-control" rows="3" id="description" ng-model="userprofileData.description" ng-readonly="!editDescription" style="overflow:auto;resize:none"></textarea>
+                <span ng-show="editDescription" class="help-block">Lägg till eller fyll på en beskrivning av dig själv.</span>
+            </div>
+            <div class="col-md-1">
+                <a ng-show="mouseOverDescription && !editDescription && userprofileData.userMatch" ng-click="editDescription = true;" class="btn btn btn-default btn-xs pull-right mouse-over">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <a ng-show="editDescription" ng-click="saveProfile(); editDescription = false;" class="btn btn btn-success btn-xs">
+                Spara
+            </a>
+            <a ng-show="editDescription" ng-click="editDescription = false;" class="btn btn btn-default btn-xs">
+                Avbryt
+            </a>
+        </div>
     </div>
 </div>
+<br />
 <div class="row">
     <div class="col-md-6">
         <div class="panel panel-default">
             <div class="panel-heading overflow">
             Färdigheter
-                <a ng-click="openSkillsForm($event)" class="btn btn btn-success btn-xs pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Lägg till</a>
+                <!--<a ng-click="openSkillsForm($event, null)" class="btn btn btn-success btn-xs pull-right"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Lägg till</a>-->
             </div>
             <div class="panel-body">
-                <dl class="dl-horizontal">
-                    <dt ng-repeat-start="skill in userprofileData.skills">
-                        <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span> {{skill.name}}
-                    </dt>
-                    <dd ng-repeat-end>
-                        {{skill.description}}
-                    </dd>
-                </dl>
+                <table id="skills-table" class="table table-striped table-hover ">
+                    <thead>
+                        <tr >
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="skill in userprofileData.skills">
+                            <td><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></td>
+                            <td>
+                                <span editable-text="skill.name" e-name="name" e-form="rowform" e-formclass="form-control input-sm">
+                                    <strong>{{ skill.name || 'empty' }}</strong>
+                                </span>
+                            </td>
+                            <td>
+                                <span editable-text="skill.description" e-name="description" e-form="rowform" e-formclass="form-control input-sm">
+                                    {{ skill.description || 'empty' }}
+                                </span>
+                                <!--<input ng-model="skill.description" type="text" class="form-control input-sm" ng-disabled="!skill.edit">-->
+                            </td>
+                            <td>
+                            <a ng-show="userprofileData.userMatch && !rowform.$visible" ng-click="rowform.$show()" class="btn btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a ng-show="userprofileData.userMatch && !rowform.$visible" ng-click="deleteSkill(skill)" class="btn btn btn-default btn-xs"><span class="glyphicon glyphicon-remove"></span></a>
+                                <!-- form -->
+                                <form editable-form name="rowform" onbeforesave="saveEditedSkill($data, skill.id)" ng-show="rowform.$visible && userprofileData.userMatch" class="form-buttons form-inline">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="btn btn btn-success btn-xs">
+                                        Spara
+                                    </button>
+                                    <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn btn-default btn-xs">
+                                        Avbryt
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        <tr ng-show="showSkillsForm">
+                            <td><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></td>
+                            <td>
+                                <div class="form-group">
+                                    <input ng-model="skill.name" type="text" class="form-control input-sm" id="skillType">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <input ng-model="skill.description" type="text" class="form-control input-sm" id="description">
+                                </div>
+                            </td>
+                            <td>
+                                <a ng-click="saveSkill(); editDescription = false;" class="btn btn btn-success btn-xs">
+                                    Spara
+                                </a>
+                                <a ng-click="showSkillsForm = false;" class="btn btn btn-default btn-xs">
+                                    Avbryt
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a ng-show="userprofileData.userMatch" ng-click="showSkillsForm = true;">Lägg till</a> 
             </div>
         </div>
     </div>

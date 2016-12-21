@@ -16,6 +16,8 @@ using Microsoft.Owin.Security.OAuth;
 using DigIn.API.Models;
 using DigIn.API.Providers;
 using DigIn.API.Results;
+using System.Linq;
+using System.Data.Entity;
 
 namespace DigIn.API.Controllers
 {

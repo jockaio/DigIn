@@ -1,4 +1,4 @@
-﻿var app = angular.module('DigInApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'ngMaterial']);
+﻿var app = angular.module('DigInApp', ['ngRoute', 'LocalStorageModule', 'angular-loading-bar', 'ngMaterial', 'xeditable']);
 
 app.config(function ($routeProvider) {
 
@@ -22,9 +22,14 @@ app.config(function ($routeProvider) {
         templateUrl: "/app/views/orders.html"
     });
 
-    $routeProvider.when("/userprofile", {
+    $routeProvider.when("/userprofile/:userProfileID", {
         controller: "userprofileController",
         templateUrl: "/app/views/userprofile.html"
+    });
+
+    $routeProvider.when("/myprojectsoverview", {
+        controller: "userprofileController",
+        templateUrl: "/app/views/myprojectsoverview.html"
     });
 
     $routeProvider.otherwise({ redirectTo: "/home" });

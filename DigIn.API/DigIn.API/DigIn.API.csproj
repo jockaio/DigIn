@@ -214,6 +214,14 @@
     <Compile Include="Migrations\201612082239565_dbupdate4.Designer.cs">
       <DependentUpon>201612082239565_dbupdate4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612122013055_dbupdate5.cs" />
+    <Compile Include="Migrations\201612122013055_dbupdate5.Designer.cs">
+      <DependentUpon>201612122013055_dbupdate5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612201843288_dbupdate6.cs" />
+    <Compile Include="Migrations\201612201843288_dbupdate6.Designer.cs">
+      <DependentUpon>201612201843288_dbupdate6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -259,6 +267,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612082239565_dbupdate4.resx">
       <DependentUpon>201612082239565_dbupdate4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612122013055_dbupdate5.resx">
+      <DependentUpon>201612122013055_dbupdate5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612201843288_dbupdate6.resx">
+      <DependentUpon>201612201843288_dbupdate6.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
