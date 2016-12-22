@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('projectsController', ['$scope', '$location','projectsService', '$routeParams', function ($scope, $location, projectsService, $routeParams) {
+app.controller('projectsController', ['$scope', '$location', 'projectsService', '$routeParams', '$timeout', function ($scope, $location, projectsService, $routeParams, $timeout) {
     if ($routeParams.new != "new") {
         init($routeParams.projectID);
     }
@@ -9,6 +9,7 @@ app.controller('projectsController', ['$scope', '$location','projectsService', '
         name: "",
         description: ""
     };
+    $scope.message = "";
 
     //Get projects to fill viewmodel.
     function init(projectId) {
@@ -37,7 +38,13 @@ app.controller('projectsController', ['$scope', '$location','projectsService', '
     $scope.saveProject = function () {
         console.log($scope.projectData);
         projectsService.postProjectData($scope.projectData).then(function (results) {
-            $location.path('/projects/' + results.data.id);
+            $scope.message = "Ditt nya uppdrag har nu skapats. Du skickas vidare om 3 sekunder...";
+            
+            var timer = $timeout(function () {
+                $timeout.cancel(timer);
+                $location.path('/projects/' + results.data.id);
+            }, 3000);
+            
         }, function (error) {
             console.log(error);
             alert(error.data.message);

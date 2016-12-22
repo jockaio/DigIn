@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -22,12 +23,14 @@ namespace DigIn.API.Models
     public class Skill
     {
         public int ID { get; set; }
-        public string Name { get; set; }
+        public int SkillsCategoryID { get; set; }
+        [ForeignKey("SkillsCategoryID")]
+        public SkillsCategory SkillsCategory { get; set; }
         public string Description { get; set; }
         public int UserProfileModelID { get; set; }
 
         [ForeignKey("UserProfileModelID")]
-        public virtual UserProfileModel UserProfileModel { get; set; }
+        public UserProfileModel UserProfileModel { get; set; }
     }
 
     public class Experience
@@ -38,9 +41,17 @@ namespace DigIn.API.Models
         public ProjectModel Project { get; set; }
     }
 
+    public class SkillsCategory
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public Category Category { get; set; }
+    }
+
     public enum Category
     {
-        IT,
-        Projektledning
+        Programmering,
+        Projektledning,
+        Bildredigering
     }
 }

@@ -18,11 +18,11 @@
                     <button class="btn btn-success navbar-toggle" data-ng-click="navbarExpanded = !navbarExpanded">
                         <span class="glyphicon glyphicon-chevron-down"></span>
                     </button>
-                    <a class="navbar-brand" href="#/">Hem</a>
+                    <a class="navbar-brand" href="#/">DigIn</a>
                 </div>
                 <div class="collapse navbar-collapse" data-collapse="!navbarExpanded">
                     <ul class="nav navbar-nav navbar-right">
-                        <li data-ng-hide="!authentication.isAuth"><a href="#/myprojectsoverview">Mina uppdrag <span class="badge">2</span></a></li>
+                        <li data-ng-hide="!authentication.isAuth"><a href="#/myprojectsoverview">Mina uppdrag <span class="badge">6</span></a></li>
                         <li data-ng-hide="!authentication.isAuth"><a href="#/userprofile">{{authentication.userName}}</a></li>
                         <li data-ng-hide="!authentication.isAuth"><a href="" data-ng-click="logOut()">Logga ut</a></li>
                         <li data-ng-hide="authentication.isAuth"> <a href="#/login">Logga in</a></li>
@@ -71,6 +71,7 @@
     <script src="app/services/authService.js"></script>
     <script src="app/services/userprofileService.js"></script>
     <script src="app/services/projectsService.js"></script>
+    <script src="app/services/skillsService.js"></script>
     <!-- Load controllers -->
     <script src="app/controllers/indexController.js"></script>
     <script src="app/controllers/homeController.js"></script>

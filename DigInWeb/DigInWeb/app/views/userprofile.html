@@ -8,7 +8,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <h4>Om {{userprofileData.firstName}}</h4>
         <div class="col-md-12 mouse-over" ng-mouseover="mouseOverDescription = true" ng-mouseleave="mouseOverDescription = false">
             <div class="col-md-11">
@@ -33,7 +33,7 @@
 </div>
 <br />
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="panel panel-default">
             <div class="panel-heading overflow">
             Färdigheter
@@ -54,12 +54,15 @@
                         <tr ng-repeat="skill in userprofileData.skills">
                             <td><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></td>
                             <td>
-                                <span editable-text="skill.name" e-name="name" e-form="rowform" e-formclass="form-control input-sm">
-                                    <strong>{{ skill.name || 'empty' }}</strong>
+                                <span editable-select="skill.skillsCategoryID" e-name="skillsCategoryID" e-form="rowform" e-ng-options="s.id as s.name for s in skillsCategories">
+                                    {{ showSkillsCategory(skill) }}
                                 </span>
+                                <!--<span editable-text="skill.skillsCategory.name" e-name="name" e-form="rowform" e-formclass="form-control input-sm">
+                                    <strong>{{ skill.skillsCategory.name || 'empty' }}</strong>
+                                </span>-->
                             </td>
                             <td>
-                                <span editable-text="skill.description" e-name="description" e-form="rowform" e-formclass="form-control input-sm">
+                                <span editable-text="skill.description" e-name="description" e-form="rowform">
                                     {{ skill.description || 'empty' }}
                                 </span>
                                 <!--<input ng-model="skill.description" type="text" class="form-control input-sm" ng-disabled="!skill.edit">-->
@@ -81,13 +84,13 @@
                         <tr ng-show="showSkillsForm">
                             <td><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></td>
                             <td>
-                                <div class="form-group">
-                                    <input ng-model="skill.name" type="text" class="form-control input-sm" id="skillType">
-                                </div>
+                                <select name="skillsCategory" id="skillsCategory" ng-model="skill.skillsCategoryID" class="form-control">
+                                    <option ng-repeat="cat in skillsCategories" value="{{cat.id}}">{{cat.name}}</option>
+                                </select>
                             </td>
                             <td>
                                 <div class="form-group">
-                                    <input ng-model="skill.description" type="text" class="form-control input-sm" id="description">
+                                    <input ng-model="skill.description" type="text" class="form-control" id="description">
                                 </div>
                             </td>
                             <td>

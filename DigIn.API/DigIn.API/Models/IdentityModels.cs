@@ -36,5 +36,6 @@ namespace DigIn.API.Models
 
         public System.Data.Entity.DbSet<DigIn.API.Models.UserProfileModel> UserProfileModels { get; set; }
         public System.Data.Entity.DbSet<DigIn.API.Models.Skill> Skills { get; set; }
+        public System.Data.Entity.DbSet<DigIn.API.Models.SkillsCategory> SkillsCategories { get; set; }
     }
 }

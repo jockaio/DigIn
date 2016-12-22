@@ -18,12 +18,6 @@ app.factory('userprofileService', ['$http', function ($http) {
         });
     };
 
-    var _deleteSkill = function (id) {
-        return $http.delete(serviceBase + 'api/DeleteSkill/' + id).then(function (results) {
-            return results;
-        });
-    };
-
     var _userProfileMatch = function (id) {
         return $http.get(serviceBase + 'api/UserProfileMatch/' + id).then(function (results) {
             return results;
@@ -32,7 +26,6 @@ app.factory('userprofileService', ['$http', function ($http) {
 
     userprofileServiceFactory.getUserprofileData = _getUserprofileData;
     userprofileServiceFactory.putUserprofileData = _putUserprofileData;
-    userprofileServiceFactory.deleteSkill = _deleteSkill;
     userprofileServiceFactory.userProfileMatch = _userProfileMatch;
 
 

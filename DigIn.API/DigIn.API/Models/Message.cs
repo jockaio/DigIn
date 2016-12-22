@@ -18,6 +18,14 @@ namespace DigIn.API.Models
         public int ProjectID { get; set; }
     }
 
+    public class MessageStatus
+    {
+        public int ID { get; set; }
+        public ApplicationUser User { get; set; }
+        public Message Message { get; set; }
+        public bool MessageRead { get; set; }
+    }
+
     public enum MessageType
     {
         ProjectInvite,

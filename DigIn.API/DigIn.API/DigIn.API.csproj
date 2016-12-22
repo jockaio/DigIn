@@ -189,6 +189,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ProjectsController.cs" />
+    <Compile Include="Controllers\SkillsController.cs" />
     <Compile Include="Controllers\UserProfileModelsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -233,6 +234,14 @@
     <Compile Include="Migrations\201612211538423_dbupdate9.cs" />
     <Compile Include="Migrations\201612211538423_dbupdate9.Designer.cs">
       <DependentUpon>201612211538423_dbupdate9.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612220911212_dbupdate10.cs" />
+    <Compile Include="Migrations\201612220911212_dbupdate10.Designer.cs">
+      <DependentUpon>201612220911212_dbupdate10.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612221230040_dbupdate11.cs" />
+    <Compile Include="Migrations\201612221230040_dbupdate11.Designer.cs">
+      <DependentUpon>201612221230040_dbupdate11.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -295,6 +304,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612211538423_dbupdate9.resx">
       <DependentUpon>201612211538423_dbupdate9.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612220911212_dbupdate10.resx">
+      <DependentUpon>201612220911212_dbupdate10.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612221230040_dbupdate11.resx">
+      <DependentUpon>201612221230040_dbupdate11.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

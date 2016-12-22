@@ -101,25 +101,6 @@ namespace DigIn.API.Controllers
             return Ok(result);
         }
 
-        [ResponseType(typeof(List<Skill>))]
-        [Route("api/DeleteSkill/{id}")]
-        public async Task<IHttpActionResult> DeleteSkill (int id)
-        {
-            Skill skill = await db.Skills.FindAsync(id);
-            if (skill == null)
-            {
-                return NotFound();
-            }
-
-            db.Skills.Remove(skill);
-            await db.SaveChangesAsync();
-
-            var currentUserId = User.Identity.GetUserId();
-            var skills = await db.Users.Where(x => x.Id == currentUserId).Select(x => x.UserProfile.Skills).FirstAsync();
-
-            return Ok(skills);
-        }
-
         // POST: api/UserProfileModels
         [ResponseType(typeof(UserProfileModel))]
         public async Task<IHttpActionResult> PostUserProfileModel(UserProfileModel userProfileModel)
@@ -151,6 +132,7 @@ namespace DigIn.API.Controllers
             return Ok(userProfileModel);
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

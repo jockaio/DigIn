@@ -1,5 +1,5 @@
 ﻿'use strict';
-app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDialog', '$routeParams', function ($scope, userprofileService, $mdDialog, $routeParams) {
+app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDialog', '$routeParams', '$filter', 'skillsService', function ($scope, userprofileService, $mdDialog, $routeParams, $filter, skillsService) {
 
     $scope.userprofileData = {
         firstName: "",
@@ -13,6 +13,8 @@ app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDia
         description: ""
     }
 
+    $scope.skillsCategories = [];
+
     //Edit fields
     $scope.mouseOverDescription = false;
     $scope.editDescription = false;
@@ -23,10 +25,22 @@ app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDia
         
         $scope.userprofileData = results.data;
 
-        if ($scope.userprofileData.skills == null) {
-            $scope.userprofileData.skills = [];
-        }
+    }, function (error) {
+        console.log(error);
+        alert(error.data.message);
+    });
 
+    //Get skillsCategories
+    skillsService.getSkillsCategories().then(function (results) {
+        $scope.skillsCategories = results.data;
+    }, function (error) {
+        console.log(error);
+        alert(error.data.message);
+    });
+
+    //Get user skills
+    skillsService.getSkills($routeParams.userProfileID).then(function (results) {
+        $scope.userprofileData.skills = results.data;
     }, function (error) {
         console.log(error);
         alert(error.data.message);
@@ -43,12 +57,11 @@ app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDia
     }
 
     //Save skill
-    $scope.saveSkill = function(id) {
-        //Add skill
-        $scope.userprofileData.skills.push($scope.skill);
-        //Save profile
-        userprofileService.putUserprofileData($scope.userprofileData).then(function (results) {
-            $scope.userprofileData = results.data;
+    $scope.saveSkill = function() {
+        
+        //Save skill
+        skillsService.saveSkill($scope.skill).then(function (results) {
+            $scope.userprofileData.skills = results.data;
             //Hide skills form
             $scope.showSkillsForm = false;
             //Reset skill
@@ -63,50 +76,24 @@ app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDia
     }
 
     $scope.saveEditedSkill = function (data, id) {
-        //Save user profile
-        userprofileService.putUserprofileData($scope.userprofileData).then(function (results) {
-            $scope.userprofileData = results.data;
+        var skill = $filter('filter')($scope.userprofileData.skills, { id: id })[0];
+        skill.skillsCategoryID = data.skillsCategoryID;
+        skill.description = data.description;
+        //Save edited skill
+        skillsService.editSkill(id, skill).then(function (results) {
+            $scope.skills = results.data;
         }, function (error) {
             console.log(error);
             alert(error.data.message);
         });
     }
 
-    //Should not be used
-    $scope.openSkillsForm = function (ev, skill) {
-        if (skill == null) {
-            $scope.skill = {
-                name: "",
-                description: ""
-            }
-        }
-
-        $mdDialog.show({
-            controller: DialogController,
-            templateUrl: 'app/views/shared/skillformpopup.html',
-            parent: angular.element(document.body),
-            targetEvent: ev,
-            clickOutsideToClose: true,
-            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
-        })
-        .then(function (answer) {
-            $scope.userprofileData.skills.push(answer);
-            userprofileService.putUserprofileData($scope.userprofileData).then(function (results) {
-                $scope.userprofileData = results.data;
-            }, function (error) {
-                console.log(error);
-                alert(error.data.message);
-            });
-        }, function () {
-        });
-    };
-
     $scope.testMethod = function () {
         console.log("clicked");
     }
 
     $scope.deleteSkill = function (skill) {
-        userprofileService.deleteSkill(skill.id).then(function (results) {
+        skillsService.deleteSkill(skill.id).then(function (results) {
             $scope.userprofileData.skills = results.data;
         }, function (error) {
             console.log(error);
@@ -114,8 +101,17 @@ app.controller('userprofileController', ['$scope', 'userprofileService', '$mdDia
         });
     };
 
-    $scope.editSkill = function (skill) {
-        
+    $scope.showSkillsCategory = function (skill) {
+        var selected = [];
+        if (skill.skillsCategoryID) {
+            selected = $filter('filter')($scope.skillsCategories, skill.skillsCategoryID);
+        }
+        return selected.length ? selected[0].name : 'Välj kategori';
+    };
+
+    $scope.toInt = function (key) {
+        // 10 is the radix, which is the base
+        return parseInt(key, 10);
     }
 
     function DialogController($scope, $mdDialog) {

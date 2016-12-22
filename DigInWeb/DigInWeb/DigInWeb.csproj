@@ -69,6 +69,7 @@
     <Content Include="app\controllers\projectsController.js" />
     <Content Include="app\controllers\userprofileController.js" />
     <Content Include="app\services\projectsService.js" />
+    <Content Include="app\services\skillsService.js" />
     <Content Include="app\services\userprofileService.js" />
     <Content Include="app\views\createproject.html" />
     <Content Include="app\views\myprojectsoverview.html" />
